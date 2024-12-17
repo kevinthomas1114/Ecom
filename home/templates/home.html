@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the E-Commerce Site</h1>
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }} | <a href="{% url 'cart' %}">Go to Cart</a> 
+    {% else %}
+        <p><a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+
+    <h2>Products</h2>
+    <ul>
+        {% for item in product %}
+            <li>
+                <img src={{item.prodcuts.img}}
+                <strong>{{ item.name }}</strong><br>
+                Price: ₹{{ item.price }}<br>
+                <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+</body>
+</html>
