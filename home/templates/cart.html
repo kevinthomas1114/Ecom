@@ -6,7 +6,7 @@
             <li>
                 <bold>{{ item.products.name }}</strong><br>
                 Quantity: {{ item.quantity }}<br>
-                Price: ₹{{ item.product.price }}<br>
+                Price: ₹{{ item.products.price }}<br>
                 <p>Subtotal: ₹{{ item.subtotal|floatformat:2 }}</p>
             </li>
             <hr>

@@ -6,18 +6,15 @@ def home(request):
     product=Product.objects.all()
     return render(request,'home.html',{'product':product})
 def ulogin(request):
-    error_message = ""  
+    error_message = ""
     if request.method == 'POST':
-        username = request.POST['Username']
-        password = request.POST['Password']
+        username = request.POST.get('Username')
+        password = request.POST.get('Password')
         user = authenticate(request, username=username, password=password)
-        print(f"Attempting login for Username: {username}, Password: {password}")
         if user is not None:
             login(request, user)
-            return redirect('home')  
-        else:
-            print("Authentication failed!")
-            error_message = "Invalid Username or Password"
+            return redirect('home')
+        error_message = "Invalid Username or Password"
     return render(request, 'ulogin.html', {'error_message': error_message})
 
 def cart(request):
@@ -36,3 +33,6 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
     return redirect('cart')
+def user_logout(request):
+    logout(request)
+    return redirect('home')

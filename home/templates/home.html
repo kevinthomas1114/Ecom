@@ -9,7 +9,11 @@
     <h1>Welcome to the E-Commerce Site</h1>
 
     {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }} | <a href="{% url 'cart' %}">Go to Cart</a> 
+        <p>
+            Welcome, {{ user.username }} | 
+            <a href="{% url 'cart' %}">Go to Cart</a> | 
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
     {% else %}
         <p><a href="{% url 'login' %}">Login</a></p>
     {% endif %}
@@ -18,7 +22,7 @@
     <ul>
         {% for item in product %}
             <li>
-                <img src={{item.prodcuts.img}}
+                <img src="{{ item.img.url }}" alt="{{ item.name }}">
                 <strong>{{ item.name }}</strong><br>
                 Price: ₹{{ item.price }}<br>
                 <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
